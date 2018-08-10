@@ -1,4 +1,14 @@
-const client = new ocd.Client({ dataUrl: 'data.json' })
+
+var baseUrl = ''
+if (window.location.hostname === 'localhost') {
+  baseUrl = 'https://data.opencrypto.io/'
+}
+
+function makeUrl(url) {
+  return [ baseUrl, url ].join('/')
+}
+
+const client = new ocd.Client({ dataUrl: makeUrl('data.json') })
 const defs = {
   Projects: { model: 'project', path: "projects[]" },
   Assets: { model: 'asset', path: "projects[].assets[]" },
@@ -40,8 +50,8 @@ var Counter = {
   view: function() {
     return Object.keys(defs).map(function(col) {
       return m(".tile.is-parent",
-        m("article.tile.is-child.box.has-text-centered", [
-          m("span.col", "" + col),
+        m("article.tile.is-child.has-text-centered", [
+          m("span.col", "# " + col),
           m("div.count", counts[col] || m("span", { style: "color: gray;" }, "?"))
         ])
       )
@@ -52,7 +62,7 @@ var Contributors = {
   oninit: function() {
     contributors = []
     return m.request({
-      url: "contributors.json"
+      url: makeUrl("contributors.json")
     }).then(function(res) {
       contributors = res.slice(0, 40)
     })
@@ -120,34 +130,34 @@ var DataSample = {
   },
   view: function() {
     return m("div", [
-      m("div", [
-        m(".level", { style: "margin-bottom: 0.7em;" }, [
-          m('.level-item', [
-            m("label", { style: "padding-right: 0.5em;"}, "Model: "),
-            m(".select", m("select", { type: "text", value: model, oninput: m.withAttr("value", setModel), style: "background-color: rgba(255, 255, 255, 0.3); border: none;" }, Object.keys(defs).map(function(k) {
-              return m("option", { id: defs[k].model }, defs[k].model)
-            })))
-          ]),
-          m('.level-item', [
-            m("label", { style: "padding-right: 0.5em;"}, "Id: "),
-            m("input.input", { type: "text", value: sampleId, oninput: m.withAttr("value", setId), style: "background-color: rgba(255, 255, 255, 0.3); border: none;" })
-          ]),
-        ]),
-        m(".level", { style: "margin-bottom: 0.7em;" }, [
-          m('.level-item', [
-            m("label", { style: "padding-right: 0.5em;"}, "Query: "),
-            m("input.input", { type: "text", value: query, oninput: m.withAttr("value", setQuery), style: "background-color: rgba(255, 255, 255, 0.3); border: none;" })
+      m(".sample-header", [
+        m(".sample-header-container", [
+          m(".level", [
+            m('.level-item', [
+              //m("label", { style: "padding-right: 0.5em;"}, "Model: "),
+              m(".select", m("select", { type: "text", value: model, oninput: m.withAttr("value", setModel) }, Object.keys(defs).map(function(k) {
+                return m("option", { id: defs[k].model }, defs[k].model)
+              })))
+            ]),
+            m('.level-item', [
+              //m("label", { style: "padding-right: 0.5em;"}, "Id: "),
+              m("input.input", { type: "text", value: sampleId, oninput: m.withAttr("value", setId), placeholder: 'Item ID ..' })
+            ]),
+            m('.level-item', [
+              //m("label", { style: "padding-right: 0.5em;"}, "Query: "),
+              m("input.input", { type: "text", value: query, oninput: m.withAttr("value", setQuery), placeholder: 'Query ..' })
+            ])
           ])
-        ])
+        ]),
       ]),
       m("pre", m("code", m.trust(formattedSource))),
-      m("div", { style: "padding-top: 0.5em;" }, [
+      m(".sample-footer", { style: "padding-top: 0.5em;" }, [
         m(".level", [
           m(".level-left", [
             m(".control.level-item", [
-              m("span", "Format: "),
-              m("label.radio", [ m("input", { oninput: m.withAttr("value", setFormat), type: "radio", name: "format", value: "yaml", checked: (format === "yaml") }), " YAML" ]),
-              m("label.radio", [ m("input", { oninput: m.withAttr("value", setFormat), type: "radio", name: "format", value: "json", checked: (format === "json") }), " JSON" ])
+              m("a", { onclick: m.withAttr("value", setFormat), name: "format", value: "yaml", class: (format === "yaml") ? 'checked' : '' }, "YAML"),
+              m.trust("&nbsp;-&nbsp;"),
+              m("a", { onclick: m.withAttr("value", setFormat), name: "format", value: "json", class: (format === "json") ? 'checked' : '' }, " JSON")
             ])
           ]),
           m(".level-right", [
@@ -173,9 +183,11 @@ var LastCommit = {
   view: function() {
     if (!metadata) return null
     return m("div", [
-      "Last commit: ",
-      m("a", { href: "https://github.com/opencrypto-io/data/commits/master" }, metadata.commit),
-      " (" + moment(metadata.time).fromNow() + ")"
+      m("div", [
+        m("b", "Last commit"),
+        " ("+moment(metadata.time).fromNow()+")",
+      ]),
+      m("a", { href: "https://github.com/opencrypto-io/data/commits/master" }, metadata.commit)
     ])
   }
 }
