@@ -134,24 +134,24 @@ a.silent-link:hover {
   text-decoration: underline;
 }
 section.downloads {
-  padding: 6em 4rem;
+  padding: 6em 1.5rem;
 }
 section.last-section-separator {
   height: 1em;
 }
 section.project {
-  padding: 6rem 4rem 2rem 4rem;
+  padding: 6rem 1.5rem 2rem 1.5rem;
 }
 section.last-section {
   box-shadow: 0 16px 24px -16px rgba(0,0,0,0.1) inset;
   border: 0;
-  padding: 6rem 3rem;
+  padding: 6rem 1.5rem;
   background-color: #f8f8f8;
 }
 section.green {
   background-color: #00C718;
   color: white;
-  padding: 6rem 3rem;
+  padding: 6rem 1.5rem;
 }
 section.green .title {
   color: white;
@@ -159,13 +159,13 @@ section.green .title {
 section.blue {
   background-color: #212E4D;
   color: white;
-  padding: 6rem 3rem;
+  padding: 6rem 1.5rem;
 }
 section.blue .title {
   color: white;
 }
 section#data-section {
-  padding-bottom: 5em;
+  padding: 2rem 1.5rem 6rem 1.5rem;
 }
 div#license-box {
   border-radius: 3.5em; 
@@ -178,6 +178,20 @@ div#license-box {
 }
 .column.illustration img {
   max-height: 250px;
+}
+.community-float-left {
+  display: inline-block;
+}
+.community-part {
+  clear: both;
+  padding-bottom: 2em;
+}
+.community-desc {
+  margin-top: 0.3em;
+  margin-left: 1em;
+  display: inline-block;
+  vertical-align: -15px;
+  min-width: 300px;
 }
 footer {
   padding-top: 1.5em;
