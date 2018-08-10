@@ -6,7 +6,8 @@
   "scripts": {
     "start": "parcel index.html",
     "watch": "parcel watch index.html",
-    "build": "parcel build index.html"
+    "build": "rm dist/** && parcel build --no-cache index.html",
+    "build-git-add": "git add dist"
   },
   "author": "",
   "license": "ISC",
@@ -14,6 +15,11 @@
     "last 1 Chrome version"
   ],
   "devDependencies": {
-    "parcel-bundler": "^1.9.7"
-  }
+    "parcel-bundler": "^1.9.7",
+    "pre-commit": "^1.2.2"
+  },
+  "pre-commit": [
+    "build",
+    "build-git-add"
+  ]
 }
