@@ -38,6 +38,16 @@ button.oc-button {
   color: #999999;
 }
 
+button.oc-button-small {
+  font-size: 1em; 
+  padding: 0 1.7em;
+  height: 42px;
+  border-radius: 25px;
+  background-color: #FFFFFF;
+  box-shadow: 0 0 1px 0 rgba(0,0,0,0.2), 0 1px 4px 0 rgba(0,0,0,0.1), 0 16px 24px -16px rgba(0,0,0,0.1);
+  color: #999999;
+}
+
 a {
   color: #57BC3D;
 }
@@ -183,7 +193,6 @@ div#license-box {
   display: inline-block;
 }
 .community-part {
-  clear: both;
   padding-bottom: 2em;
 }
 .community-desc {
