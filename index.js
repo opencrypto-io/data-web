@@ -116,12 +116,15 @@ async function redrawSource() {
 }
 function formatSource(res) {
   let dump = null
+  let type = null
   if (format === "json") {
     dump = JSON.stringify(res, null, 2)
+    type = 'json'
   } else {
     dump = jsyaml.dump(res)
+    type = 'yaml'
   }
-  formattedSource = hljs.highlightAuto(dump).value
+  formattedSource = hljs.highlight(type, dump).value
 }
 var DataSample = {
   oninit: async function() {
