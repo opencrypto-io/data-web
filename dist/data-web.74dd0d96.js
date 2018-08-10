@@ -244,7 +244,8 @@ var LastCommit = {
   },
   view: function () {
     if (!metadata) return null;
-    return m("div", [m("div", [m("b", "Last commit"), " (" + moment(metadata.time).fromNow() + ")"]), m("a", { href: "https://github.com/opencrypto-io/data/commits/master" }, metadata.commit)]);
+    let commitShort = metadata.commit.replace(/^(.{7}).+(.{7})$/, "$1");
+    return m("div", [m("div.is-hidden-mobile", "Last commit: "), m("a", { href: "https://github.com/opencrypto-io/data/commits/master", title: metadata.commit }, commitShort), m("span", " (" + moment(metadata.time).fromNow() + ")")]);
   }
 };
 m.mount(document.getElementById('counters'), Counter);

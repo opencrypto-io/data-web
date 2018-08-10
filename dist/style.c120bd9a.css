@@ -63,11 +63,14 @@ b.green {
 section.hero h2.subtitle {
   padding-top: 0.3em;
 }
+section.hero div.hero-body {
+  padding-top: 5rem;
+}
 section.hero {
-  height: 506px;
+  height: 536px;
   background: url(bg.2a4b4ac2.svg);
   background-size: 2560px auto;
-  background-position: center 100px;
+  background-position: center 130px;
   background-repeat: no-repeat;
   box-shadow: 0 0 100px 0 rgba(0,0,0,0.15);
 }
@@ -271,10 +274,6 @@ footer a.silent-link {
 }
 #data-sample div.level a.checked {
   color: white;
-}
-p#last-commit { 
-  margin-top: 1em;
-  line-height: 2em;
 }
 p.content {
   line-height: 2em;
