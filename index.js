@@ -164,11 +164,11 @@ var DataSample = {
             ])
           ]),
           m(".level-right", [
-            m(".level-item", m("a", { href: "https://github.com/opencrypto-io/data/blob/master/db/projects/"+sampleSourceProject+"/project.yaml", style: "color: white;" }, [
+            m(".level-item", m("a", { href: "https://github.com/opencrypto-io/data/blob/master/db/projects/"+sampleSourceProject+"/project.yaml", style: "color: white;", target: '_blank' }, [
               m("i.far.fa-file"),
               m("span", " Source file")
             ])),
-            m(".level-item", m("a", { href: "https://github.com/opencrypto-io/data/edit/master/db/projects/"+sampleSourceProject+"/project.yaml", style: "color: white;" }, [
+            m(".level-item", m("a", { href: "https://github.com/opencrypto-io/data/edit/master/db/projects/"+sampleSourceProject+"/project.yaml", style: "color: white;", target: '_blank' }, [
               m("i.far.fa-edit"),
               m("span", " Edit")
             ])),
