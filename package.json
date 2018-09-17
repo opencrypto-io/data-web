@@ -6,7 +6,7 @@
   "scripts": {
     "start": "parcel index.html",
     "watch": "parcel watch index.html",
-    "build": "rm dist/** && parcel build --no-cache index.html",
+    "build": "rm -f dist/** && ln -s ../../data/dist dist/data && parcel build --no-cache index.html",
     "build-git-add": "git add dist"
   },
   "author": "",

@@ -1,7 +1,40 @@
+showdown.extension('codehighlight', function() {
+   function htmlunencode(text) {
+    return (
+      text
+        .replace(/&amp;/g, '&')
+        .replace(/&lt;/g, '<')
+        .replace(/&gt;/g, '>')
+      );
+  }
+  return [
+    {
+      type: 'output',
+      filter: (text, converter, options) => {
+        var left  = '<pre><code\\b[^>]*>',
+            right = '</code></pre>',
+            flags = 'g',
+            replacement = function (wholeMatch, match, left, right) {
+              match = htmlunencode(match);
+              let m = wholeMatch.match(/code class="([^\s]+)/)
+              if (m) {
+                return left + hljs.highlight(m[1], match).value + right;
+              }
+              return left + match + right;
+            };
+        return showdown.helper.replaceRecursiveRegExp(text, replacement, left, right, flags);
+      }
+    }
+  ]
+})
+const markdown = new showdown.Converter({ extensions: [ 'codehighlight'] })
 
 var baseUrl = ''
 if (window.location.hostname === 'localhost') {
   baseUrl = 'https://data.opencrypto.io/'
+}
+if (window.location.hostname.match('localtunnel.me')) {
+  baseUrl = 'http://' + window.location.hostname + '/data/'
 }
 
 function makeUrl (url) {
@@ -27,7 +60,7 @@ var exampleIds = {
   ledger: 'bitcoin:bitcoin',
   asset: 'makerdao:dai',
   client: 'bitcoin:bitcoin-core',
-  network: 'ethereum:eth:main',
+  network: 'ethereum:ethereum:main',
   exchange: 'binance:binance',
   market: 'makerdao:oasis:market'
 }
@@ -51,14 +84,27 @@ var Counter = {
     if (!defs) {
       return m('center', 'Loading ..')
     }
-    return pick.map(function (col) {
-      return m('.tile.is-parent',
-        m('article.tile.is-child.has-text-centered', [
-          m('span.col', `# ${col[0].toUpperCase() + col.substring(1)}`),
-          m('div.count', counts[col] || m('span', { style: 'color: gray;' }, '?'))
-        ])
-      )
+    function renderCol (col) {
+      return m('article.tile.is-child.has-text-centered', [
+        m('span.col', `# ${col[0].toUpperCase() + col.substring(1)}`),
+        m('div.count', counts[col] || m('span', { style: 'color: gray;' }, '?'))
+      ])
+    }
+    let arrs = []
+    let colNum = 3
+    pick.forEach((col, i) => {
+      let c = Math.floor((i)/colNum)
+      if (!arrs[c]) arrs[c] = []
+      arrs[c].push(renderCol(col))
     })
+    return m('div', { style: 'width:100%;' }, [
+      m('.is-hidden-tablet', arrs.map((cols) => {
+        return m('.tile.is-parent.is-flex-touch', cols)
+      })),
+      m('.is-hidden-mobile', [
+        m('.tile.is-parent.is-flex-touch', pick.map(renderCol))
+      ])
+    ])
   }
 }
 var Contributors = {
@@ -74,8 +120,8 @@ var Contributors = {
     if (contributors.length === 0) return m('div', 'Loading GitHub data ..')
     return m('div', [
       m('p.title.is-4', [
-        m('b', m('a.silent-link', { href: 'https://github.com/opencrypto-io/data/graphs/contributors'}, 'Contributors')),
-        ' - ' + contributors.length + ' people'
+        m('a.silent-link', { href: 'https://github.com/opencrypto-io/data/graphs/contributors'}, 'Contributors'),
+        m('span.light', ' (' + contributors.length + ' people)')
       ]),
       m('div.content', contributors.map(function (c) {
         return m('a.contributor', { href: c.html_url },
@@ -200,6 +246,42 @@ var LastCommit = {
     ])
   }
 }
+
+const libs = require('./liblist')
+var curLib = null
+var curLibHtml = null
+
+function showLib (lib) {
+  curLib = lib
+	if (libs[lib] && libs[lib].text) {
+    let md  = libs[curLib].text
+    let html = markdown.makeHtml(libs[curLib].text)
+		curLibHtml = m.trust(html)
+	} else {
+    curLibHtml = null
+  }
+	//setTimeout(() => hljs.initHighlighting(), 2000)
+}
+showLib('js')
+
+const Libraries = {
+  view: () => {
+    return m('div', [
+      m('.level.tabs', [
+        m('.level-left', Object.keys(libs).map((lk) => {
+          let lib = libs[lk]
+          if (lib.planned) {
+            return m('.level-item', { class: 'planned' }, lib.name + ' (planned)')
+          }
+          return m('.level-item', { class: curLib === lk ? 'selected' : null }, m('a', { onclick: m.withAttr('id', showLib), id: lk }, lib.name))
+        }))
+      ]),
+      curLibHtml ? m('.content', m('div', [ curLibHtml, m('p', ['Library Source: ',m('a', { href: libs[curLib].url }, libs[curLib].url)])])) : null
+    ])
+  }
+}
+
+m.mount(document.getElementById('libraries'), Libraries)
 m.mount(document.getElementById('counters'), Counter)
 m.mount(document.getElementById('contributors'), Contributors)
 m.mount(document.getElementById('data-sample'), DataSample)

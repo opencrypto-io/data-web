@@ -12,13 +12,15 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css">
         <link href="style.css" rel="stylesheet" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+				<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-9ralMzdK1QYsk4yBY680hmsb4/hJ98xK3w0TIaJ3ll4POWpWUYaA2bRjGGujGT8w" crossorigin="anonymous">
+				<link rel="stylesheet" href="./hljs-atom-one-dark.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/3.12.0/js-yaml.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mithril/1.1.6/mithril.min.js"></script>
         <script src="https://opencrypto-io.github.io/data-js/dist/ocd.lib.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.8.6/showdown.min.js"></script>
         <script async defer src="https://buttons.github.io/buttons.js"></script>
         <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
           new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -47,6 +49,16 @@
               <img id="logo" src="opencrypto.svg" width="80">
               <h1 class="title" id="oc-title"><b class="thin">Open</b>Crypto<b class="green">Data</b></h1>
               <h2 class="subtitle">Community-driven cryptoassets dataset</h2>
+              <div id="action-box" class="has-text-centered">
+                <div class="big-buttons-shadow is-text-centered">
+                  <div class="big-buttons-container">
+                    <div class="big-buttons is-text-centered">
+                      <a href="https://explorer.opencrypto.io"><button class="button-custom left"><i class="oc-icon schema is-hidden-mobile"></i>Explore schema</button></a>
+                      <a href="https://schema.opencrypto.io"><button class="button-custom right"><i class="oc-icon explorer is-hidden-mobile"></i>Data Explorer</button></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </section>
@@ -65,15 +77,28 @@
                 <p class="content" style="padding-right: 2em;">
                   OpenCrypto.io is an independent community-based project for collecting, organising and free distribution of crypto related data. We are creating platform for storing machine-readable data of any asset (like blockchains, exchanges, dapps etc. ) with focus not only on technical and price data. All collected data are forkable, re-usable and open for all developers to play and build their projects above them. Our mission is to establish self-sustaining community that could find those information useful and would edit data by itself. By this OpenCrypto could become verified source of truth for whole ecosystem and help to fulfill promises of decentralization.
                 </p>
-                <p>
-                  <a href="https://github.com/opencrypto-io/data">
-                    <button class="button oc-button">I want to&nbsp;<b class="green"> collaborate</b></button>
-                  </a>
-                </p>
               </div>
-              <div class="column is-5 contributors-column" >
-                <div id="contributors">
-                  <!-- Generated contributors here -->
+              <div class="column is-5 contributors-column">
+                <div>
+                  <div class="title is-4"><a href="https://github.com/opencrypto-io" class="silent-link">GitHub</a></div>
+                    <p>We are using GitHub as our main data structure.<br/>You can contribute by updating data repositories.</p>
+                    <div class="github-box">
+                      <div class="level">
+                        <div class="level-left">
+                          <div class="level-item"><i class="fab fa-github"></i></div>
+                          <div class="level-item"><a href="https://github.com/opencrypto-io/data">OpenCrypto/Data</a></div>
+                        </div>
+                        <div class="level-right">
+                          <div class="level-item">
+                            <a class="github-button" href="https://github.com/opencrypto-io/data" data-icon="octicon-star" data-show-count="true" data-size="large" aria-label="Star opencrypto-io/data on GitHub">Star</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div id="contributors">
+                    <!-- Generated contributors here -->
+                  </div>
                 </div>
               </div>
             </div>
@@ -83,8 +108,8 @@
           <div class="container">
             <div id="license-box">
               <div class="tile is-ancestor">
-                <div class="tile is-child has-text-centered is-4">
-                  <img src="https://blog.mgechev.com/images/open-source/logo.png" style="height: 75px; margin-top: 0.5em;" />
+                <div class="tile is-child has-text-centered is-4 license-logo">
+                  <img src="./oss-logo.png" style="height: 50px; width: 206px; margin-top: 0.5em;" />
                 </div>
                 <div class="tile is-child" style="display: flex; align-items: center;">
                   <div>
@@ -105,9 +130,13 @@
                 <p class="content">
                   Most project are relying on private databases keeping everyone's data locked and unverifiable. We want exact opposite. Anyone can use our data for his project, anyone can submit changes to shared database and its up to community if those changes will be updated. Currently is database located on GitHub.com/OpenCrypto-io in form of JSON files, but we are already implementing IPFS for further innovation.
                 </p>
+                <p>
+                  <a href="https://github.com/opencrypto-io/data">
+                    <button class="button oc-button green-outline">I want to&nbsp;<b class="green"> collaborate</b></button>
+                  </a>
+                </p>
               </div>
-              <div class="column is-4 illustration has-text-centered">
-                <img src="./illustration.svg" />
+              <div class="column is-4 has-text-centered illustration is-flex">
               </div>
             </div>
           </div>
@@ -117,20 +146,59 @@
           <div class="container">
             <div class="columns">
               <div class="column" style="padding-right: 1.5em;">
-                <p class="title">Open-Database Structure & Syntax</p>
+                <p class="title">Data Structure & Schema</p>
                 <p class="content">
-                  Data are formatted in form of .yaml files (simpler JSON) in Collections folder on GitHub. Every asset folder contains project.yaml file and relevant attachments. 
-                  <br>Information structure of every asset is defined on schema.OpenCrypto.io. You can see full definitions and apply queries here in editor.
+                  Data are divided to collections of deeply nested JSON documents (source files are writen in YAML) by their purpose like <i>Projects, Assets</i> or <i>Exchanges</i> (<a href="https://schema.opencrypto.io">see complete list</a>). Every property is specified in our <a href="https://schema.opencrypto.io">OpenCrypto Schema</a> standard, which is typed in <a href="https://json-schema.org/">JSON Schema</a> vocabulary.
+                  <br />
+                  Our schema is designed to be easy to understand and to encompass all data properties that is needed. If you miss some property or have another issue to discuss, you can create a new <a href="https://github.com/opencrypto-io/schema/issues">Schema Issue</a> on GitHub.
                 </p>
-                <a href="https://schema.opencrypto.io">
-                  <button class="button oc-button is-hidden-mobile">Go to &nbsp;<b class="green"> schema.opencrypto.io</b></button>
-                  <button class="button oc-button-small is-hidden-tablet">Go to &nbsp;<b class="green"> schema.opencrypto.io</b></button>
-                </a>
+                <h3 class="title is-5">Examples:</h3>
+                <p class="content">
+                  <ul class="">
+                    <li><a href="#">Team of the Monero Project</a></li>
+                    <li><a href="#">Binance Coin (BNB) token contract address</a></li>
+                    <li><a href="#">Bitcoin Whitepaper</a></li>
+                  </ul>
+                </p>
+                <div class="button-part">
+                  <a href="https://schema.opencrypto.io">
+                    <button class="button oc-button is-hidden-mobile">Go to &nbsp;<b class="green"> schema.opencrypto.io</b></button>
+                    <button class="button oc-button-small is-hidden-tablet">Go to &nbsp;<b class="green"> schema.opencrypto.io</b></button>
+                  </a>
+                </div>
               </div>
               <div class="column is-6">
                 <div id="data-sample"></div>
               </div>
             </div>
+          </div>
+        </section>
+
+        <section class="section dark">
+          <div class="container">
+              <p class="title">We create libraries & tools for community</p>
+              <p>Every tool we create is open-source and free for anyone to use.<br/>We build a page, where you can find tools you need for building applications.</p>
+              <p class="title is-4">Libraries</p>
+              <div id="libraries"></div>
+
+              <p class="title is-4">Tools</p>
+              <hr />
+              <div class="tile is-parent">
+                <div class="tile">
+                  <article class="media">
+                    <div class="media-left"><i class="fal fa-file-export"></i></div>
+                    <div class="media-content"><a href="https://github.com/opencrypto-io/data-github-extension">Data GitHub Extension</a> (experimental)<br/>Extension to Chrome for easy editing of Data on GitHub.</div>
+                  </article>
+                </div>
+              </div>
+              <!--div class="tile is-parent">
+                <div class="tile">
+                  <article class="media">
+                    <div class="media-left"><i class="fal fa-file-export"></i></div>
+                    <div class="media-content">Example project</div>
+                  </article>
+                </div>
+              </div-->
           </div>
         </section>
 
@@ -151,7 +219,7 @@
           </div>
         </section>
 
-        <section class="section downloads">
+        <!--section class="section downloads">
           <div class="container">
             <div class="columns">
               <div class="column">
@@ -162,7 +230,7 @@
               </div>
             </div>
           </div>
-        </section>
+        </section-->
         <section class="section last-section">
           <div class="container">
             <div class="columns">
@@ -192,14 +260,19 @@
                     </div>
                   </div>
                   <p class="content" style="padding-top: 1em;">
-                    If you are Front-end /Back-end, UX Designer, Data Analyst or just a fan with interesting ideas, please write us a mail to <a href="mailto:info@opencrypto.io">info@opencrypto.io</a>
+                    If you are Front-end /Back-end, UX Designer, Data Analyst or just a fan with interesting ideas,<br/>please write us a mail to <a href="mailto:info@opencrypto.io">info@opencrypto.io</a>
                   </p>
                 </div>
               </div>
-              <div class="column is-narrow" id="follows">
+              <div class="column is-3" id="follows">
                 <p class="title">Follow Us</p>
-                <a class="button oc-button-follow" href="https://twitter.com/OpenCrypto_io"><i class="fab fa-twitter"></i> twitter.com/OpenCrypto_io</a><br />
-                <a class="button oc-button-follow" href="https://facebook.com/opencryptodata"><i class="fab fa-facebook"></i> Facebook.com/OpenCryptoData</a><br/>
+                <ul class="follow-list">
+                  <li><a href="https://medium.com/OpenCrypto_io"><button class="oc-button-follow"><i class="fab fa-medium"></i></button>Medium.com</a></li>
+                  <li><a href="https://reddit.com/r/opencrypto"><button class="oc-button-follow"><i class="fab fa-reddit"></i></button>Reddit.com</a></li>
+                  <li><a href="https://bitcointalk.org"><button class="oc-button-follow"><i class="fab fa-bitcoin"></i></button>Bitcointalk.org</a></li>
+                  <li><a href="https://twitter.com/OpenCrypto_io"><button class="oc-button-follow"><i class="fab fa-twitter"></i></button>Twitter.com</a></li>
+                  <li><a href="https://facebook.com/opencryptodata"><button class="oc-button-follow"><i class="fab fa-facebook"></i></button>Facebook.com</a></li>
+                </ul>
               </div>
             </div>
           </div>
@@ -210,7 +283,7 @@
           <div class="container">
           <nav class="level">
             <div class="level-left">
-              <div class="level-item"><p>2018 <a href="https://opencrypto.io" class="silent-link">OpenCrypto Foundation</a></p></div>
+              <div class="level-item"><p>2018 <a href="https://opencrypto.io" class="silent-link">OpenCrypto Foundation</a> - Images by Freepik</p></div>
             </div>
             <!--div classs="level-right">
               <a href="https://opencrypto.io">Continue to OpenCrypto.io</a>
