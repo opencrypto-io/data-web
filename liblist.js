@@ -1,4 +1,15 @@
-const jsUse = `
+
+module.exports = {
+  js: {
+    name: 'JavaScript (Node.js/Webpack)',
+    url: 'https://github.com/opencrypto-io/data-js',
+    text: `
+Install package using NPM:
+\`\`\`
+npm install --save opencrypto-data-js
+\`\`\`
+
+Include library in your script and use:
 \`\`\`js
 const ocd = require('opencrypto-data-js')
 
@@ -8,20 +19,7 @@ let data = await ocd.get("project", "ethereum")
 // get data via client instance
 const client = new ocd.Client({ preload: true })
 let data = await client.get("project", "ethereum")
-\`\`\``
-
-module.exports = {
-  js: {
-    name: 'JavaScript (Node.js)',
-    url: 'https://github.com/opencrypto-io/data-js',
-    text: `
-Install package using NPM:
 \`\`\`
-npm install --save opencrypto-data-js
-\`\`\`
-
-Include library in your script and use:
-${jsUse}
 `
   },
   jsweb: {
@@ -34,8 +32,15 @@ Insert script loader into your html:
 \`\`\`
 
 And use in your scripts:
-${jsUse}
-`
+\`\`\`js
+// get data directly
+let data = await ocd.get("project", "ethereum")
+
+// get data via client instance
+const client = new ocd.Client({ preload: true })
+let data = await client.get("project", "ethereum")
+\`\`\``
+
   },
   php: {
     name: 'PHP',
