@@ -273,9 +273,12 @@ footer a.silent-link {
 }
 #data-sample .sample-header .level .level-item select,
 #data-sample .sample-header .level .level-item input {
-  background-color: rgba(255, 255, 255, 0.3);
   border: none;
   box-shadow: none;
+}
+
+#data-sample .sample-header select {
+  font-weight: bold;
 }
 
 #data-sample .sample-header .level .level-item input {
@@ -285,7 +288,7 @@ footer a.silent-link {
   font-size: 14px;
   line-height: 20px;
   height: 30em;
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: #292c35;
   color: rgba(0, 0, 0);
 }
 #data-sample .hljs-string {
@@ -300,16 +303,16 @@ footer a.silent-link {
 }
 #data-sample .sample-header {
   border-radius: 6px 6px 0 0;
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: #292c35;
 }
 #data-sample .sample-footer .level {
   margin-top: auto;
   margin-bottom: auto;
 }
 #data-sample .sample-footer {
-  color: black;
+  color: #00c718;
   padding: 0.8em 1em;
-  background: rgba(0, 0, 0, 0.4);
+  background: #292c35;
   font-size: 0.9em;
   border-radius: 0 0 6px 6px;
 }
@@ -319,11 +322,17 @@ footer a.silent-link {
 #data-sample div.level-right div.level-item { 
   padding-right: 0.5em;
 }
+#data-sample div.level a:hover { 
+  text-decoration: underline;
+}
 #data-sample div.level a {
-  color: black;
+  color: white;
+  text-decoration: none;
 }
 #data-sample div.level a.checked {
-  color: white;
+  color: #00c718;
+  font-weight: bold;
+  text-decoration: none;
 }
 p.content {
   line-height: 2em;
@@ -368,7 +377,8 @@ i.icon-rocketchat {
   border: 0;
   cursor: pointer;
   display: inline-block;
-  width: 250px;
+  /*width: 160px;*/
+  width: 260px;
 }
 #action-box .big-buttons a:hover button.left {
   text-decoration: underline;
@@ -425,7 +435,6 @@ i.icon-rocketchat {
 .level.tabs {
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  height: 64px;
 }
 
 .level.tabs .level-item { 

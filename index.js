@@ -29,8 +29,8 @@ showdown.extension('codehighlight', function() {
 })
 const markdown = new showdown.Converter({ extensions: [ 'codehighlight'] })
 
-var baseUrl = ''
-if (window.location.hostname === 'localhost') {
+baseUrl = 'https://data.opencrypto.io/'
+if (window.location.host === 'localhost') {
   baseUrl = 'https://data.opencrypto.io/'
 }
 if (window.location.hostname.match('localtunnel.me')) {
