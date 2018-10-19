@@ -12,6 +12,9 @@ a:hover {
   color: #00C718;
   text-decoration: underline;
 }
+a.button.oc-button-community:hover span.icon i {
+  text-decoration: none !important;
+}
 i.fab.fa-twitter { color: #46A1EC; }
 i.fab.fa-facebook { color: #405B95; }
 i.fab.fa-bitcoin { color: #EFA01F; }
